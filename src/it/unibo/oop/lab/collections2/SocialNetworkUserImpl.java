@@ -1,7 +1,14 @@
 package it.unibo.oop.lab.collections2;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * 
@@ -29,7 +36,8 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * think of what type of keys and values would best suit the requirements
      */
-
+	
+	private Map<String, HashSet<U>> groupsUsersFollowed;	
     /*
      * [CONSTRUCTORS]
      * 
@@ -56,6 +64,12 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(name, surname, user, userAge);
+        this.groupsUsersFollowed = new HashMap<>();
+    }
+    
+    public SocialNetworkUserImpl(final String name, final String surname, final String user) {
+        super(name, surname, user);
+        this.groupsUsersFollowed = new HashMap<>();
     }
 
     /*
@@ -66,17 +80,25 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
-        return false;
+        if(!this.groupsUsersFollowed.containsKey(circle)) {
+        	this.groupsUsersFollowed.put(circle, new HashSet<U>());
+        	return this.groupsUsersFollowed.get(circle).add(user);
+        }else {
+        	return this.groupsUsersFollowed.get(circle).add(user);
+        }
     }
 
     @Override
-    public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+    public Collection<U> getFollowedUsersInGroup(final String groupName) {      
+    	if(!this.groupsUsersFollowed.containsKey(groupName)) {
+    		this.groupsUsersFollowed.put(groupName, new HashSet<U>());
+    	}
+		return new HashSet<U>(this.groupsUsersFollowed.get(groupName)); //Come se avessi fatto una add all
     }
 
     @Override
     public List<U> getFollowedUsers() {
-        return null;
+        return new ArrayList<U>(this.getFollowedUsers());
     }
 
 }

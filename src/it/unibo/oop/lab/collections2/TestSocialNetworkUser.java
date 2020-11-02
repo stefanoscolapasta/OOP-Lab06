@@ -43,10 +43,10 @@ public final class TestSocialNetworkUser {
          * 
          * * Adam Smith, asmith, (no age)
          */
-        final SocialNetworkUser<User> kbacon = null;
-        final SocialNetworkUser<User> dwashington = null;
-        final SocialNetworkUser<User> mgladwell = null;
-        final SocialNetworkUser<User> ntaleb = null;
+        final SocialNetworkUser<User> kbacon = new SocialNetworkUserImpl<>("Kevin", "Bacon", "kbacon", 56);
+        final SocialNetworkUser<User> dwashington = new SocialNetworkUserImpl<>("Denzel", "Washington", "dwashington", 59);
+        final SocialNetworkUser<User> mgladwell = new SocialNetworkUserImpl<>("Malcom", "Gladwell", "mgladwell", 51);
+        final SocialNetworkUser<User> ntaleb = new SocialNetworkUserImpl<>("Nicholas", "Taleb", "ntaleb", 54);
         final User asmith = new UserImpl("Adam", "Smith", "asmith");
         /*
          * Make people follow each other
@@ -69,7 +69,10 @@ public final class TestSocialNetworkUser {
         /*
          * Adding another friend to Denzel's "writers" group...
          */
+
         dwashFriends.add(asmith);
+        System.out.println(dwashFriends.toString());
+        System.out.println(dwashington.getFollowedUsersInGroup(WRITERS));
         /*
          * The above operation *MUST* have no effect on Denzel's profile itself:
          * STILL TWO PEOPLE in denzel's group called writers
