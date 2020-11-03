@@ -37,15 +37,7 @@ public class GraphImpl<N> implements Graph<N> {
 	}
 
 	public Set<N> linkedNodes(N node) {
-		final Set<N> set = new HashSet<>();
-		for(N i : this.graph.keySet()) {
-			if(i == node) {
-				for(N j : this.graph.get(i)) {
-					set.add(j);
-				}
-			}
-		}
-		return set;
+		return new HashSet<>(this.graph.get(node));
 	}
 
 	public List<N> getPath(N source, N target) {
