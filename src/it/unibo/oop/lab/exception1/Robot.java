@@ -35,7 +35,6 @@ public class Robot {
      * @return If the Up movement has been performed
      */
     public void moveUp() {
-    	this.isBatteryEnoughToMove();
         this.moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
     }
 
@@ -45,7 +44,6 @@ public class Robot {
      * @return If the Down movement has been performed
      */
     public void moveDown() {
-    	this.isBatteryEnoughToMove();
         this.moveToPosition(this.environment.getCurrPosX(), environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
     }
 
@@ -83,10 +81,15 @@ public class Robot {
      *            the new Y position to move the robot to
      * @return true if robot gets moved, false otherwise
      */
-    private void moveToPosition(final int newX, final int newY){
-    	this.environment.move(newX, newY);
-        this.consumeBatteryForMovement();
-        this.log("Moved to position(" + newX + "," + newY + ").");
+    private void moveToPosition(final int newX, final int newY) throws NotEnoughBatteryException{
+    	if(this.isBatteryEnoughToMove()) {
+    		this.environment.move(newX, newY);
+            this.consumeBatteryForMovement();
+            this.log("Moved to position(" + newX + "," + newY + ").");
+    	}else {
+    		throw new NotEnoughBatteryException(this.batteryLevel);
+    	}
+    	
     }
 
     /**
@@ -115,10 +118,8 @@ public class Robot {
      * 
      * @return A boolean indicating if the robot has enough energy to move
      */
-    protected void isBatteryEnoughToMove() throws NotEnoughBatteryException{
-		if(this.getBatteryLevel() < Robot.MOVEMENT_DELTA_CONSUMPTION) {
-			throw new NotEnoughBatteryException(this.batteryLevel);
-		}    	
+    protected boolean isBatteryEnoughToMove(){
+		return this.batteryLevel >= Robot.MOVEMENT_DELTA_CONSUMPTION;    	
     }
 
     /**

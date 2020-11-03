@@ -29,11 +29,7 @@ public class GraphImpl<N> implements Graph<N> {
 	}
 
 	public Set<N> nodeSet() {
-		final Set<N> set = new HashSet<>();
-		for(N i : this.graph.keySet()) {
-			set.add(i);
-		}
-		return set;
+		return new HashSet<>(this.graph.keySet());
 	}
 
 	public Set<N> linkedNodes(N node) {
