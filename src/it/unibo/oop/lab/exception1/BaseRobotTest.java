@@ -101,7 +101,7 @@ public final class BaseRobotTest {
 		        // out of world: returns false
 	        	r2.moveUp();
 	            r2.moveDown();
-	            Assert.fail();
+	            Assert.fail(); //Per verificare che sia stata lanciata un' eccezione, se non è così è un problemaS
        	}catch(final NotEnoughBatteryException e) {
         	System.out.println(e.getMessage());
         }
