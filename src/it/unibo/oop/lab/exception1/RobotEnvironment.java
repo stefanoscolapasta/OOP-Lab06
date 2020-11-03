@@ -47,7 +47,6 @@ public class RobotEnvironment {
      *         only inside the environment's boundaries)
      */
     public void move(final int newX, final int newY) {
-        try {
         	if (newX >= RobotEnvironment.WORLD_X_LOWER_LIMIT
                     && newX <= RobotEnvironment.WORLD_X_UPPER_LIMIT
                     && newY >= RobotEnvironment.WORLD_Y_LOWER_LIMIT
@@ -57,10 +56,6 @@ public class RobotEnvironment {
             } else {
                 throw new PositionOutOfBoundException(this.getCurrPosX(), this.getCurrPosY());
             }
-        }catch(final PositionOutOfBoundException e) {
-        	System.out.println("OUT OF BOUND---> " + e.getMessage());
-        }
-    	
     }
 
     /**

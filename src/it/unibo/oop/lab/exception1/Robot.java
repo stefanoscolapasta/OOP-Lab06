@@ -119,7 +119,7 @@ public class Robot {
      * @return A boolean indicating if the robot has enough energy to move
      */
     protected boolean isBatteryEnoughToMove(){
-		return this.batteryLevel >= Robot.MOVEMENT_DELTA_CONSUMPTION;    	
+		return this.batteryLevel > Robot.MOVEMENT_DELTA_CONSUMPTION;    	
     }
 
     /**
