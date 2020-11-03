@@ -82,10 +82,8 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     public boolean addFollowedUser(final String circle, final U user) {
         if(!this.groupsUsersFollowed.containsKey(circle)) {
         	this.groupsUsersFollowed.put(circle, new HashSet<U>());
-        	return this.groupsUsersFollowed.get(circle).add(user);
-        }else {
-        	return this.groupsUsersFollowed.get(circle).add(user);
         }
+        return this.groupsUsersFollowed.get(circle).add(user);
     }
 
     @Override
